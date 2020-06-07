@@ -20,7 +20,7 @@ local function procdir(pid)
 	return result
 end
 
-local command = os.getenv("TMUX_FILELIST_COMMAND") or "tree -C -L 1 %s"
+local command = os.getenv("TMUX_FILETREE_COMMAND") or "tree -C -L 1 %s"
 
 -- returns the desired output for files in given directory
 local function ls(dir)
