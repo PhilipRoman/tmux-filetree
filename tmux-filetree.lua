@@ -36,23 +36,24 @@ end
 -- write it to stdout to clear terminal
 local TPUT_CLEAR = io.popen'tput reset; tput cup 0 0':read 'a'
 
--- main loop
-function run()
-	local oldhash = ""
 
-	while true do
-		local dir = workingdir(activepid())
-		-- this isn't used for output; it is a faster way of checking if any files have changed
-		local filehash = io.popen('echo ' .. dir .. '/**'):read 'a'
-		-- only clear terminal when text has changed
-		if filehash ~= oldhash then
-			oldhash = filehash
-			io.write(TPUT_CLEAR)
-			print(listfiles(dir))
-			os.execute 'sleep 0.2'
-		end
-	end
+local oldhash = ""
+local function fileschanged(dir)
+	-- this isn't used for output; it is a faster way of checking if any files have changed
+	local procfilehash = io.popen('echo ' .. dir .. '/**')
+	local filehash = procfilehash:read 'a'
+	procfilehash:close()
+	local changed = filehash ~= oldhash
+	oldhash = filehash
+	return changed
 end
 
--- suppress error messages upon ctrl-c
-pcall(run)
+while true do
+	local dir = workingdir(activepid())
+	-- only clear terminal when text has changed
+	if fileschanged(dir) then
+		io.write(TPUT_CLEAR)
+		print(listfiles(dir))
+		os.execute 'sleep 0.2'
+	end
+end
