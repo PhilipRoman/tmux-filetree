@@ -1,4 +1,4 @@
-local delay = 1.0
+local delay = tonumber("TMUX_FILETREE_DELAY") or 1.0
 local command = os.getenv("TMUX_FILETREE_COMMAND") or "tree -C -L 1 $(readlink -e %s)"
 
 local function err(...)

@@ -12,21 +12,30 @@ tmux-filetree - simple dynamic file tree which always tracks your active tmux pa
 
 == Description
 
-Tmux-filetree displays a file tree in the current tmux pane.
-The file tree will always track your active tmux pane and its working directory. 
+Tmux-filetree displays a file tree in the current tmux pane. The file 
+tree will always track your active tmux pane and its working 
+directory.
 
 == Options
 
-*-d* _NUMBER_::
-	Controls the delay between polling attempts, in seconds. May be a non-integer value.
+*-d* _NUMBER_:: Controls the delay between polling attempts, in 
+	seconds. May be a non-integer value.
 
-*-c* _COMMAND_::
-	Sets a user-defined command to display files. The string *%s* in _COMMAND_ will
-	be substituted with the target directory. The target directory name may be a symlink
-	to the real directory.
+*-c* _COMMAND_:: Sets a user-defined command to display files. The 
+	string *%s* in _COMMAND_ will be substituted with the target 
+	directory. The target directory name may be a symlink to the real 
+	directory.
 
 *-h*::
 	Shows a help message
+
+== Environment
+
+The environment variable *TMUX_FILETREE_COMMAND* can be used to set 
+the default command (see option *-c*).
+
+The environment variable *TMUX_FILETREE_DELAY* can be used to set the 
+default delay (see option *-d*).
 
 == Author
 
