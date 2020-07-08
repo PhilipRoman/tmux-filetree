@@ -23,6 +23,8 @@ do
 			print "Usage: tmux-filetree [-d NUMBER]"
 			print "  -d NUMBER         Delay between updates in seconds"
 			print "  -c COMMAND        Command to execute to view files, %s is the target directory"
+			print "  -h                Show this help message"
+			print "See manual page tmux-filetree(1) for more information"
 			os.exit(0)
 		end
 		i = i + 1

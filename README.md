@@ -7,6 +7,8 @@ and it will begin tracking your active pane working directory.
 
 ![File tree demo animation](demonstration.gif)
 
+See the [manual](man/tmux-filetree.adoc) for more information.
+
 ## Installing
 
 Installation is not necessary, but is recommended.
@@ -18,9 +20,3 @@ directory.
 Running tmux-filetree requires any version of Lua or LuaJit on
 the path. The installer will detect the most preferable Lua
 version and use it to launch tmux-filetree.
-
-## Configuration
-
-The environment variable `TMUX_FILETREE_COMMAND` sets the tree
-command you want to use. The string `%s` will be replaced with
-the directory that should be displayed.
