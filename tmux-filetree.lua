@@ -1,5 +1,5 @@
 local delay = tonumber(os.getenv("TMUX_FILETREE_DELAY")) or 1.0
-local command = os.getenv("TMUX_FILETREE_COMMAND") or "tree -C -L 1 $(readlink -e %s)"
+local command = os.getenv("TMUX_FILETREE_COMMAND") or 'tree -C -L 1 "$(readlink -e %s)"'
 
 local function err(...)
 	io.stderr:write(table.concat {...}, "\n")
@@ -52,7 +52,7 @@ end
 
 -- returns the desired output for files in given directory
 local function listfiles(dir)
-	local cmdline = command:gsub("%%s", dir or '.')
+	local cmdline = command:gsub("%%s", dir and ("'"..dir.."'") or '.')
 	local p = io.popen(cmdline)
 	local lines = {}
 	for line in p:lines() do
