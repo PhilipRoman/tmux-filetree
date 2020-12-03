@@ -16,23 +16,18 @@ done)
 
 ASCIIDOCTOR ?= $(strip $(shell command -v asciidoctor 2>/dev/null))
 
-install: tmux-filetree.lua docs
+install: tmux-filetree.lua man/tmux-filetree.1
 	@echo "============ Installing in $(PREFIX), set \$$PREFIX to change the location" ============
 	(echo "#!$(LUA)"; cat $<) > $(PREFIX)/bin/tmux-filetree
 	chmod +x $(PREFIX)/bin/tmux-filetree
-ifneq ($(ASCIIDOCTOR),)
 	@cp -v man/tmux-filetree.1 "$(PREFIX)/share/man/man1/"
-endif
 
 uninstall:
 	@rm -v $(PREFIX)/tmux-filetree
 
+ifneq ($(ASCIIDOCTOR),)
 man/%.1: man/%.adoc
 	asciidoctor -b manpage $<
-
-ifneq ($(ASCIIDOCTOR),)
-docs: man/tmux-filetree.1
-else
-docs:
-	@echo ============ "asciidoctor not found, man-pages won't be installed, set \$$ASCIIDOCTOR to override" ============
 endif
+
+docs: man/tmux-filetree.1
